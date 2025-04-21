@@ -1,0 +1,87 @@
+---
+title: "Long-Term Development Indicators and Global Trends"
+author: 
+  - name: "Jacky An (Emory ID: 2486597)"
+  - name: "Bernice"
+  - name: "Eric"
+date: "04/21/2025"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Introduction
+
+Our final project explores the long-term trends and interrelationships
+between key development indicators across countries using data from the
+World Bank's World Development Indicators (WDI) database. Specifically,
+we focus on life expectancy, fertility rate, population growth, and
+school enrollment. These indicators are foundational in understanding
+the social and demographic evolution of countries from 1960 to 2023.
+
+By analyzing these indicators longitudinally, we aim to reveal how
+population health, demographic transition, and education investment
+interact over time, and how they can collectively inform national and
+global development strategies.
+
+## Background
+
+Development indicators are critical tools for understanding how
+societies progress over time. Measures such as life expectancy and
+fertility rate reveal how access to healthcare, education, and economic
+opportunities impact the quality of life and long-term population
+dynamics. In contrast, metrics like school enrollment and population
+growth highlight the importance of human capital and demographic
+pressure in shaping a country’s future trajectory.
+
+Longitudinal data allows us to move beyond snapshots and instead capture
+how these dynamics unfold over decades. For example, countries with
+declining fertility and increasing school enrollment often exhibit
+longer life expectancies, but this relationship may vary depending on
+region, income level, or development stage.
+
+The World Development Indicators (WDI) database provides extensive
+historical data on these themes, making it an ideal resource for
+studying global development trends over time. Our project leverages this
+resource to analyze patterns from 1960 through 2023 across over 100
+countries.
+
+## Research Questions
+
+Our project addresses the following questions: 1. How has life
+expectancy evolved globally since 1960, and how is it associated with
+fertility and education trends? 2. What is the relationship between
+school enrollment and fertility rate across countries? 3. Do countries
+with rapid population growth face distinct development challenges in
+terms of life expectancy? 4. What insights can we derive from
+multivariable regression models that predict life expectancy using
+demographic and education indicators?
+
+## Objectives
+
+The primary objectives of this project are to: - Analyze long-term
+trends in life expectancy, fertility, population growth, and school
+enrollment using WDI data. - Examine correlations among these indicators
+to understand global development patterns. - Use regression models to
+investigate how these factors jointly predict life expectancy. -
+Visualize global development trajectories using intuitive and
+informative charts.
+
+## Data and Methods
+
+This project uses four key indicators from the WDI: - **Life Expectancy
+at Birth (years)** — SP.DYN.LE00.IN - **Fertility Rate (births per
+woman)** — SP.DYN.TFRT.IN - **Population Growth (annual %)** —
+SP.POP.GROW - **School Enrollment, Primary (% gross)** — SE.PRM.ENRR
+
+The data were cleaned and reshaped from wide to long format, removing
+missing values and converting strings to numeric types. The final
+dataset includes annual observations from 1960 to 2023 for each country.
+
+We used Python (Pandas, Seaborn, Matplotlib, Statsmodels) for data
+manipulation, visualization, and statistical analysis. A Quarto report
+was created to organize the narrative, visual, and quantitative results
+in a cohesive document.
+
+------------------------------------------------------------------------
