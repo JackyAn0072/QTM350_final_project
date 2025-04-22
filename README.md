@@ -8,7 +8,7 @@ This repository contains the final project for the course, focusing on analyzing
 
 ## Group Members
 
-- Jacky An (Emory ID: 2486597)  
+- Jacky An 
 - Bernice  
 - Eric  
 
