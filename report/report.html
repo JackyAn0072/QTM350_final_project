@@ -24,10 +24,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="report_files/libs/clipboard/clipboard.min.js"></script>
 <script src="report_files/libs/quarto-html/quarto.js"></script>
 <script src="report_files/libs/quarto-html/popper.min.js"></script>
 <script src="report_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -37,6 +71,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="report_files/libs/bootstrap/bootstrap-973236bd072d72a04ee9cd82dcc9cb29.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -92,17 +129,396 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="research-questions" class="level2">
 <h2 class="anchored" data-anchor-id="research-questions">Research Questions</h2>
-<p>Our project addresses the following questions: 1. How has life expectancy evolved globally since 1960, and how is it associated with fertility and education trends? 2. What is the relationship between school enrollment and fertility rate across countries? 3. Do countries with rapid population growth face distinct development challenges in terms of life expectancy? 4. What insights can we derive from multivariable regression models that predict life expectancy using demographic and education indicators?</p>
+<p>Our project addresses the following questions:</p>
+<ol type="1">
+<li>How has life expectancy evolved globally since 1960, and how is it associated with fertility and education trends?<br>
+</li>
+<li>What is the relationship between school enrollment and fertility rate across countries?<br>
+</li>
+<li>Do countries with rapid population growth face distinct development challenges in terms of life expectancy?<br>
+</li>
+<li>What insights can we derive from multivariable regression models that predict life expectancy using demographic and education indicators?</li>
+</ol>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<p>The primary objectives of this project are to: - Analyze long-term trends in life expectancy, fertility, population growth, and school enrollment using WDI data. - Examine correlations among these indicators to understand global development patterns. - Use regression models to investigate how these factors jointly predict life expectancy. - Visualize global development trajectories using intuitive and informative charts.</p>
+<p>The primary objectives of this project are to:</p>
+<ul>
+<li>Analyze long-term trends in life expectancy, fertility, population growth, and school enrollment using WDI data.<br>
+</li>
+<li>Examine correlations among these indicators to understand global development patterns.<br>
+</li>
+<li>Use regression models to investigate how these factors jointly predict life expectancy.<br>
+</li>
+<li>Visualize global development trajectories using intuitive and informative charts.</li>
+</ul>
 </section>
 <section id="data-and-methods" class="level2">
 <h2 class="anchored" data-anchor-id="data-and-methods">Data and Methods</h2>
-<p>This project uses four key indicators from the WDI: - <strong>Life Expectancy at Birth (years)</strong> — SP.DYN.LE00.IN - <strong>Fertility Rate (births per woman)</strong> — SP.DYN.TFRT.IN - <strong>Population Growth (annual %)</strong> — SP.POP.GROW - <strong>School Enrollment, Primary (% gross)</strong> — SE.PRM.ENRR</p>
-<p>The data were cleaned and reshaped from wide to long format, removing missing values and converting strings to numeric types. The final dataset includes annual observations from 1960 to 2023 for each country.</p>
-<p>We used Python (Pandas, Seaborn, Matplotlib, Statsmodels) for data manipulation, visualization, and statistical analysis. A Quarto report was created to organize the narrative, visual, and quantitative results in a cohesive document.</p>
+<p>This project uses four key indicators from the WDI:</p>
+<ul>
+<li><strong>Life Expectancy at Birth (years)</strong> — <code>SP.DYN.LE00.IN</code><br>
+</li>
+<li><strong>Fertility Rate (births per woman)</strong> — <code>SP.DYN.TFRT.IN</code><br>
+</li>
+<li><strong>Population Growth (annual %)</strong> — <code>SP.POP.GROW</code><br>
+</li>
+<li><strong>School Enrollment, Primary (% gross)</strong> — <code>SE.PRM.ENRR</code></li>
+</ul>
+<div id="53433837" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and clean data</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"datasets/wdi_data.csv"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"Country Name"</span>].notna()]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>year_cols <span class="op">=</span> [col <span class="cf">for</span> col <span class="kw">in</span> df.columns <span class="cf">if</span> <span class="st">"YR"</span> <span class="kw">in</span> col]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df_long <span class="op">=</span> df.melt(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    id_vars<span class="op">=</span>[<span class="st">"Country Name"</span>, <span class="st">"Country Code"</span>, <span class="st">"Series Name"</span>, <span class="st">"Series Code"</span>],</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    value_vars<span class="op">=</span>year_cols,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    var_name<span class="op">=</span><span class="st">"Year"</span>, value_name<span class="op">=</span><span class="st">"Value"</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df_long[<span class="st">"Year"</span>] <span class="op">=</span> df_long[<span class="st">"Year"</span>].<span class="bu">str</span>.extract(<span class="vs">r"(\d</span><span class="sc">{4}</span><span class="vs">)"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>df_long <span class="op">=</span> df_long[df_long[<span class="st">"Year"</span>].notna()]</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>df_long[<span class="st">"Year"</span>] <span class="op">=</span> df_long[<span class="st">"Year"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>df_long <span class="op">=</span> df_long[df_long[<span class="st">"Value"</span>].notna() <span class="op">&amp;</span> (df_long[<span class="st">"Value"</span>] <span class="op">!=</span> <span class="st">".."</span>)]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>df_wide <span class="op">=</span> df_long.pivot(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"Country Name"</span>, <span class="st">"Country Code"</span>, <span class="st">"Year"</span>],</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span><span class="st">"Series Name"</span>,</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    values<span class="op">=</span><span class="st">"Value"</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>).reset_index()</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>df_wide <span class="op">=</span> df_wide.rename(columns<span class="op">=</span>{</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Life expectancy at birth, total (years)"</span>: <span class="st">"LifeExpectancy"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fertility rate, total (births per woman)"</span>: <span class="st">"FertilityRate"</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Population growth (annual %)"</span>: <span class="st">"PopGrowth"</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"School enrollment, primary (</span><span class="sc">% g</span><span class="st">ross)"</span>: <span class="st">"PrimaryEnrollGross"</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> [<span class="st">"LifeExpectancy"</span>, <span class="st">"FertilityRate"</span>, <span class="st">"PopGrowth"</span>, <span class="st">"PrimaryEnrollGross"</span>]:</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    df_wide[col] <span class="op">=</span> pd.to_numeric(df_wide[col], errors<span class="op">=</span><span class="st">"coerce"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h2>
+<div id="f6fabe16" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_wide[[<span class="st">"LifeExpectancy"</span>, <span class="st">"FertilityRate"</span>, <span class="st">"PopGrowth"</span>, <span class="st">"PrimaryEnrollGross"</span>]].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Series Name</th>
+<th data-quarto-table-cell-role="th">LifeExpectancy</th>
+<th data-quarto-table-cell-role="th">FertilityRate</th>
+<th data-quarto-table-cell-role="th">PopGrowth</th>
+<th data-quarto-table-cell-role="th">PrimaryEnrollGross</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">count</td>
+<td>14290.000000</td>
+<td>14290.000000</td>
+<td>14287.000000</td>
+<td>11022.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">mean</td>
+<td>66.333781</td>
+<td>3.566771</td>
+<td>1.659472</td>
+<td>97.080280</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">std</td>
+<td>10.332392</td>
+<td>1.866508</td>
+<td>1.677009</td>
+<td>19.795185</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">min</td>
+<td>10.989000</td>
+<td>0.586000</td>
+<td>-27.470786</td>
+<td>3.081780</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">25%</td>
+<td>60.032000</td>
+<td>1.940151</td>
+<td>0.643642</td>
+<td>92.552750</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">50%</td>
+<td>68.642079</td>
+<td>2.988000</td>
+<td>1.597588</td>
+<td>100.756630</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">75%</td>
+<td>73.810628</td>
+<td>5.104000</td>
+<td>2.568327</td>
+<td>106.550449</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">max</td>
+<td>86.372000</td>
+<td>8.864000</td>
+<td>21.700343</td>
+<td>257.434204</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>These summary statistics help us understand the general range and variability of the four indicators across time and space. Life expectancy shows a wide range across countries, from below 50 years to over 80. Fertility rate and population growth also exhibit significant variance, reflecting different stages of demographic transition.</p>
+</section>
+<section id="visualization-life-expectancy-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="visualization-life-expectancy-over-time">Visualization: Life Expectancy Over Time</h2>
+<div id="faeeabb1" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>selected <span class="op">=</span> [<span class="st">"United States"</span>, <span class="st">"India"</span>, <span class="st">"China"</span>, <span class="st">"Nigeria"</span>]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country <span class="kw">in</span> selected:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    sns.lineplot(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        data<span class="op">=</span>df_wide[df_wide[<span class="st">"Country Name"</span>] <span class="op">==</span> country],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        x<span class="op">=</span><span class="st">"Year"</span>, y<span class="op">=</span><span class="st">"LifeExpectancy"</span>, label<span class="op">=</span>country</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Life Expectancy Over Time (1960–2023)"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Life Expectancy (Years)"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This chart clearly shows the upward trajectory of life expectancy across all selected countries, albeit with different starting points and rates of change.</p>
+</section>
+<section id="exploring-relationships-between-indicators" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-relationships-between-indicators">Exploring Relationships Between Indicators</h2>
+<p>We now use a pairplot to explore the relationships among the four indicators:</p>
+<div id="0fa19a43" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    df_wide[[<span class="st">"LifeExpectancy"</span>, <span class="st">"FertilityRate"</span>, <span class="st">"PopGrowth"</span>, <span class="st">"PrimaryEnrollGross"</span>]].dropna()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>This plot reveals a strong negative correlation between life expectancy and fertility, and a weak positive association between life expectancy and school enrollment.</p>
+</section>
+</section>
+<section id="regression-analysis" class="level1">
+<h1>Regression Analysis</h1>
+<p>We build a linear regression model to predict life expectancy using fertility, population growth, and school enrollment:</p>
+<div id="059e13f7" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ols_model <span class="op">=</span> smf.ols(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"LifeExpectancy ~ FertilityRate + PopGrowth + PrimaryEnrollGross"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_wide</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>).fit()</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ols_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>OLS Regression Results</caption>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Dep. Variable:</td>
+<td>LifeExpectancy</td>
+<td data-quarto-table-cell-role="th">R-squared:</td>
+<td>0.801</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Model:</td>
+<td>OLS</td>
+<td data-quarto-table-cell-role="th">Adj. R-squared:</td>
+<td>0.801</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Method:</td>
+<td>Least Squares</td>
+<td data-quarto-table-cell-role="th">F-statistic:</td>
+<td>1.481e+04</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Date:</td>
+<td>Mon, 21 Apr 2025</td>
+<td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Time:</td>
+<td>23:41:07</td>
+<td data-quarto-table-cell-role="th">Log-Likelihood:</td>
+<td>-32266.</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">No. Observations:</td>
+<td>11020</td>
+<td data-quarto-table-cell-role="th">AIC:</td>
+<td>6.454e+04</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Df Residuals:</td>
+<td>11016</td>
+<td data-quarto-table-cell-role="th">BIC:</td>
+<td>6.457e+04</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Df Model:</td>
+<td>3</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Covariance Type:</td>
+<td>nonrobust</td>
+<td data-quarto-table-cell-role="th"></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td></td>
+<td data-quarto-table-cell-role="th">coef</td>
+<td data-quarto-table-cell-role="th">std err</td>
+<td data-quarto-table-cell-role="th">t</td>
+<td data-quarto-table-cell-role="th">P&gt;|t|</td>
+<td data-quarto-table-cell-role="th">[0.025</td>
+<td data-quarto-table-cell-role="th">0.975]</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Intercept</td>
+<td>77.3726</td>
+<td>0.312</td>
+<td>247.977</td>
+<td>0.000</td>
+<td>76.761</td>
+<td>77.984</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">FertilityRate</td>
+<td>-4.9956</td>
+<td>0.033</td>
+<td>-150.721</td>
+<td>0.000</td>
+<td>-5.061</td>
+<td>-4.931</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">PopGrowth</td>
+<td>1.0451</td>
+<td>0.036</td>
+<td>28.855</td>
+<td>0.000</td>
+<td>0.974</td>
+<td>1.116</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">PrimaryEnrollGross</td>
+<td>0.0525</td>
+<td>0.003</td>
+<td>20.565</td>
+<td>0.000</td>
+<td>0.047</td>
+<td>0.058</td>
+</tr>
+</tbody>
+</table>
+
+
+<table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Omnibus:</td>
+<td>721.339</td>
+<td data-quarto-table-cell-role="th">Durbin-Watson:</td>
+<td>0.132</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Prob(Omnibus):</td>
+<td>0.000</td>
+<td data-quarto-table-cell-role="th">Jarque-Bera (JB):</td>
+<td>3504.437</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Skew:</td>
+<td>-0.023</td>
+<td data-quarto-table-cell-role="th">Prob(JB):</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Kurtosis:</td>
+<td>5.762</td>
+<td data-quarto-table-cell-role="th">Cond. No.</td>
+<td>720.</td>
+</tr>
+</tbody>
+</table>
+<br><br>Notes:<br>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</div>
+</div>
+<p>Interpretation Fertility Rate shows a strong negative association with life expectancy, suggesting that lower fertility correlates with longer lives.</p>
+<p>School Enrollment has a modest positive effect on life expectancy, highlighting the role of education in improving population health.</p>
+<p>Population Growth shows mixed or negligible influence, depending on regional factors.</p>
+<section id="additional-insights-country-group-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="additional-insights-country-group-analysis">Additional Insights: Country Group Analysis</h2>
+<p>We can group countries by income level or region (if data permits) to further refine our analysis. For now, we use a simple example of comparing high vs low fertility countries:</p>
+<div id="aad72e28" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_wide[<span class="st">"FertilityGroup"</span>] <span class="op">=</span> pd.qcut(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    df_wide[<span class="st">"FertilityRate"</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    q<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>[<span class="st">"Low"</span>, <span class="st">"High"</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>df_wide, x<span class="op">=</span><span class="st">"FertilityGroup"</span>, y<span class="op">=</span><span class="st">"LifeExpectancy"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Life Expectancy by Fertility Group"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Fertility Rate Group"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Life Expectancy"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="report_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The boxplot clearly shows that countries with lower fertility tend to have higher life expectancy.</p>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Our analysis shows that demographic and education indicators are deeply intertwined with population health. Life expectancy has improved dramatically worldwide since 1960, particularly in countries with declining fertility and improved school enrollment.</p>
+<p>Multivariable regression confirms the strong influence of fertility rate on life expectancy, with additional positive effects from educational access. While population growth plays a less clear role, it may be relevant when considered in combination with economic or geographic context.</p>
+<p>This project reinforces the importance of investing in education and healthcare to foster long-term development and improve quality of life globally.</p>
 <hr>
 </section>
 </section>

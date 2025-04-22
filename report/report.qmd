@@ -49,39 +49,191 @@ countries.
 
 ## Research Questions
 
-Our project addresses the following questions: 1. How has life
-expectancy evolved globally since 1960, and how is it associated with
-fertility and education trends? 2. What is the relationship between
-school enrollment and fertility rate across countries? 3. Do countries
-with rapid population growth face distinct development challenges in
-terms of life expectancy? 4. What insights can we derive from
-multivariable regression models that predict life expectancy using
-demographic and education indicators?
+Our project addresses the following questions:
+
+1.  How has life expectancy evolved globally since 1960, and how is it
+    associated with fertility and education trends?\
+2.  What is the relationship between school enrollment and fertility
+    rate across countries?\
+3.  Do countries with rapid population growth face distinct development
+    challenges in terms of life expectancy?\
+4.  What insights can we derive from multivariable regression models
+    that predict life expectancy using demographic and education
+    indicators?
 
 ## Objectives
 
-The primary objectives of this project are to: - Analyze long-term
-trends in life expectancy, fertility, population growth, and school
-enrollment using WDI data. - Examine correlations among these indicators
-to understand global development patterns. - Use regression models to
-investigate how these factors jointly predict life expectancy. -
-Visualize global development trajectories using intuitive and
-informative charts.
+The primary objectives of this project are to:
+
+-   Analyze long-term trends in life expectancy, fertility, population
+    growth, and school enrollment using WDI data.\
+-   Examine correlations among these indicators to understand global
+    development patterns.\
+-   Use regression models to investigate how these factors jointly
+    predict life expectancy.\
+-   Visualize global development trajectories using intuitive and
+    informative charts.
 
 ## Data and Methods
 
-This project uses four key indicators from the WDI: - **Life Expectancy
-at Birth (years)** — SP.DYN.LE00.IN - **Fertility Rate (births per
-woman)** — SP.DYN.TFRT.IN - **Population Growth (annual %)** —
-SP.POP.GROW - **School Enrollment, Primary (% gross)** — SE.PRM.ENRR
+This project uses four key indicators from the WDI:
 
-The data were cleaned and reshaped from wide to long format, removing
-missing values and converting strings to numeric types. The final
-dataset includes annual observations from 1960 to 2023 for each country.
+-   **Life Expectancy at Birth (years)** — `SP.DYN.LE00.IN`\
+-   **Fertility Rate (births per woman)** — `SP.DYN.TFRT.IN`\
+-   **Population Growth (annual %)** — `SP.POP.GROW`\
+-   **School Enrollment, Primary (% gross)** — `SE.PRM.ENRR`
 
-We used Python (Pandas, Seaborn, Matplotlib, Statsmodels) for data
-manipulation, visualization, and statistical analysis. A Quarto report
-was created to organize the narrative, visual, and quantitative results
-in a cohesive document.
+```{python}
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import statsmodels.formula.api as smf
+
+# Load and clean data
+df = pd.read_csv("datasets/wdi_data.csv")
+df = df[df["Country Name"].notna()]
+year_cols = [col for col in df.columns if "YR" in col]
+
+df_long = df.melt(
+    id_vars=["Country Name", "Country Code", "Series Name", "Series Code"],
+    value_vars=year_cols,
+    var_name="Year", value_name="Value"
+)
+
+df_long["Year"] = df_long["Year"].str.extract(r"(\d{4})")
+df_long = df_long[df_long["Year"].notna()]
+df_long["Year"] = df_long["Year"].astype(int)
+
+
+df_long = df_long[df_long["Value"].notna() & (df_long["Value"] != "..")]
+
+df_wide = df_long.pivot(
+    index=["Country Name", "Country Code", "Year"],
+    columns="Series Name",
+    values="Value"
+).reset_index()
+
+df_wide = df_wide.rename(columns={
+    "Life expectancy at birth, total (years)": "LifeExpectancy",
+    "Fertility rate, total (births per woman)": "FertilityRate",
+    "Population growth (annual %)": "PopGrowth",
+    "School enrollment, primary (% gross)": "PrimaryEnrollGross"
+})
+
+for col in ["LifeExpectancy", "FertilityRate", "PopGrowth", "PrimaryEnrollGross"]:
+    df_wide[col] = pd.to_numeric(df_wide[col], errors="coerce")
+```
+
+## Summary Statistics
+
+```{python}
+df_wide[["LifeExpectancy", "FertilityRate", "PopGrowth", "PrimaryEnrollGross"]].describe()
+```
+
+These summary statistics help us understand the general range and
+variability of the four indicators across time and space. Life
+expectancy shows a wide range across countries, from below 50 years to
+over 80. Fertility rate and population growth also exhibit significant
+variance, reflecting different stages of demographic transition.
+
+## Visualization: Life Expectancy Over Time
+
+```{python}
+plt.figure(figsize=(12, 6))
+selected = ["United States", "India", "China", "Nigeria"]
+for country in selected:
+    sns.lineplot(
+        data=df_wide[df_wide["Country Name"] == country],
+        x="Year", y="LifeExpectancy", label=country
+    )
+plt.title("Life Expectancy Over Time (1960–2023)")
+plt.ylabel("Life Expectancy (Years)")
+plt.xlabel("Year")
+plt.legend()
+plt.tight_layout()
+plt.show()
+```
+
+This chart clearly shows the upward trajectory of life expectancy across
+all selected countries, albeit with different starting points and rates
+of change.
+
+## Exploring Relationships Between Indicators
+
+We now use a pairplot to explore the relationships among the four
+indicators:
+
+```{python}
+sns.pairplot(
+    df_wide[["LifeExpectancy", "FertilityRate", "PopGrowth", "PrimaryEnrollGross"]].dropna()
+)
+```
+
+This plot reveals a strong negative correlation between life expectancy
+and fertility, and a weak positive association between life expectancy
+and school enrollment.
+
+# Regression Analysis
+
+We build a linear regression model to predict life expectancy using
+fertility, population growth, and school enrollment:
+
+```{python}
+ols_model = smf.ols(
+    "LifeExpectancy ~ FertilityRate + PopGrowth + PrimaryEnrollGross",
+    data=df_wide
+).fit()
+ols_model.summary()
+```
+
+Interpretation Fertility Rate shows a strong negative association with
+life expectancy, suggesting that lower fertility correlates with longer
+lives.
+
+School Enrollment has a modest positive effect on life expectancy,
+highlighting the role of education in improving population health.
+
+Population Growth shows mixed or negligible influence, depending on
+regional factors.
+
+## Additional Insights: Country Group Analysis
+
+We can group countries by income level or region (if data permits) to
+further refine our analysis. For now, we use a simple example of
+comparing high vs low fertility countries:
+
+```{python}
+df_wide["FertilityGroup"] = pd.qcut(
+    df_wide["FertilityRate"],
+    q=2,
+    labels=["Low", "High"]
+)
+
+sns.boxplot(data=df_wide, x="FertilityGroup", y="LifeExpectancy")
+plt.title("Life Expectancy by Fertility Group")
+plt.xlabel("Fertility Rate Group")
+plt.ylabel("Life Expectancy")
+plt.show()
+```
+
+The boxplot clearly shows that countries with lower fertility tend to
+have higher life expectancy.
+
+## Conclusion
+
+Our analysis shows that demographic and education indicators are deeply
+intertwined with population health. Life expectancy has improved
+dramatically worldwide since 1960, particularly in countries with
+declining fertility and improved school enrollment.
+
+Multivariable regression confirms the strong influence of fertility rate
+on life expectancy, with additional positive effects from educational
+access. While population growth plays a less clear role, it may be
+relevant when considered in combination with economic or geographic
+context.
+
+This project reinforces the importance of investing in education and
+healthcare to foster long-term development and improve quality of life
+globally.
 
 ------------------------------------------------------------------------
