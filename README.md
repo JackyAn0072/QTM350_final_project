@@ -39,20 +39,18 @@ By analyzing these indicators across over 100 countries and more than six decade
 ## Repository Structure
 
 1. **data**  
-   Contains the original and cleaned datasets used in this project.
+   We store this in the datasets file 
 
 2. **scripts**  
    - `data_analysis.py`: Main script for data wrangling, statistical analysis, and visualization.  
    - `regression_models.py`: Supplementary script for running regression models predicting life expectancy.
 
 3. **figures**  
-   Stores all generated plots and visualizations used in the final report.
+   We store this for backup in the file figure
 
 4. **report**  
    - `report.qmd` and `report.html`: Final compiled report containing narrative explanations, plots, and statistical results.
 
-5. **documentation**  
-   - `codebook.md`: Descriptions of all variables used in the dataset.
 
 ---
 
