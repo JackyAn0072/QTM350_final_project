@@ -13,17 +13,10 @@ editor:
 
 # Introduction
 
-Our final project explores the long-term trends and interrelationships
-between key development indicators across countries using data from the
-World Bank's World Development Indicators (WDI) database. Specifically,
-we focus on life expectancy, fertility rate, population growth, and
-school enrollment. These indicators are foundational in understanding
-the social and demographic evolution of countries from 1960 to 2023.
+Our final project explores the long-term trends and interrelationships between key development indicators across countries using data from the World Bank's World Development Indicators (WDI) database. Specifically, we focus on life expectancy, fertility rate, population growth, and
+school enrollment. These indicators are foundational in understanding the social and demographic evolution of countries from 1960 to 2023.
 
-By analyzing these indicators longitudinally, we aim to reveal how
-population health, demographic transition, and education investment
-interact over time, and how they can collectively inform national and
-global development strategies.
+By analyzing these indicators longitudinally, we aim to reveal how population health, demographic transition, and education investment interact over time, and how they can collectively inform national and global development strategies.
 
 ## Background
 
