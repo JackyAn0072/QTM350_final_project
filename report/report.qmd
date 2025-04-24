@@ -2,7 +2,7 @@
 title: "Long-Term Development Indicators and Global Trends"
 author: 
   - name: "Jacky An (Emory ID: 2486597)"
-  - name: "Bernice"
+  - name: "Bernice (Emory ID: 2487091)"
   - name: "Eric"
 date: "04/21/2025"
 format: html
@@ -13,10 +13,9 @@ editor:
 
 # Introduction
 
-Our final project explores the long-term trends and interrelationships between key development indicators across countries using data from the World Bank's World Development Indicators (WDI) database. Specifically, we focus on life expectancy, fertility rate, population growth, and
-school enrollment. These indicators are foundational in understanding the social and demographic evolution of countries from 1960 to 2023.
+Our final project explores the long-term trends and interrelationships between key development indicators across countries using data from the World Bank’s World Development Indicators (WDI) database. We focus on life expectancy, fertility rate, population growth, school enrollment, and GDP per capita growth—indicators that collectively reflect the social, demographic, and economic development of nations between 1970 and 2023.
 
-By analyzing these indicators longitudinally, we aim to reveal how population health, demographic transition, and education investment interact over time, and how they can collectively inform national and global development strategies.
+Using these variables, we examine how health, education, and demographic factors evolve over time and interact with one another across countries with different income levels, development statuses, and continental contexts. This includes evaluating how changes in primary school enrollment affect not only fertility and life expectancy but also broader outcomes like economic growth.
 
 ## Background
 
@@ -44,28 +43,33 @@ countries.
 
 Our project addresses the following questions:
 
-1.  How has life expectancy evolved globally since 1960, and how is it
-    associated with fertility and education trends?\
-2.  What is the relationship between school enrollment and fertility
-    rate across countries?\
-3.  Do countries with rapid population growth face distinct development
-    challenges in terms of life expectancy?\
-4.  What insights can we derive from multivariable regression models
-    that predict life expectancy using demographic and education
-    indicators?
+1. How has life expectancy evolved globally since 1960, and how is it associated with fertility and education trends?
+
+2. What is the relationship between school enrollment and fertility rate across countries?
+
+3. Do countries with rapid population growth face distinct development challenges in terms of life expectancy and health outcomes?
+
+4. How do demographic and education indicators jointly predict life expectancy, and does this relationship differ by region or development status?
+
+5. What patterns emerge when comparing development indicators between developed and developing nations?
+
+6. Is there a consistent relationship between primary school enrollment growth and GDP growth, particularly when segmented by income group?
+
+
 
 ## Objectives
 
 The primary objectives of this project are to:
 
--   Analyze long-term trends in life expectancy, fertility, population
-    growth, and school enrollment using WDI data.\
--   Examine correlations among these indicators to understand global
-    development patterns.\
--   Use regression models to investigate how these factors jointly
-    predict life expectancy.\
--   Visualize global development trajectories using intuitive and
-    informative charts.
+- Analyze long-term trends in life expectancy, fertility, population growth, school enrollment, and GDP growth using the World Development Indicators dataset.
+
+- Examine the interrelationships among key development indicators from multiple comparative angles: by income group, by development status, and by continent.
+
+- Use regression models and correlation analysis to explore how demographic and educational factors contribute to both life expectancy and economic growth.
+
+- Investigate whether countries with extremely high school enrollment rates (e.g., >100% gross) exhibit unique demographic or economic profiles.
+
+- Visualize development trajectories using clear and informative visualizations, including heatmaps, facet scatter plots, and regression overlays.
 
 ## Data and Methods
 
@@ -75,6 +79,7 @@ This project uses four key indicators from the WDI:
 -   **Fertility Rate (births per woman)** — `SP.DYN.TFRT.IN`\
 -   **Population Growth (annual %)** — `SP.POP.GROW`\
 -   **School Enrollment, Primary (% gross)** — `SE.PRM.ENRR`
+-   **GDP per capita (current US$)** - `NY.GDP.PCAP.CD`
 
 ```{python}
 import pandas as pd
