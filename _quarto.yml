@@ -1,0 +1,6 @@
+project:
+  type: default
+
+execute:
+  python: /Users/apple/opt/anaconda3/bin/python
+
