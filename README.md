@@ -1,88 +1,133 @@
-# QTM350_final_project
+# QTM350 Final Project: Long-Term Development Indicators and Global Trends
 
-# Long-Term Development Indicators and Global Trends
-
-This repository contains the final project for the course, focusing on analyzing long-term development trends across countries using data from the World Bank's World Development Indicators (WDI). The study investigates relationships between life expectancy, fertility rate, population growth, and school enrollment from 1960 to 2023.
+Welcome to our final project repository for **QTM 350: Data Science for Public Policy** at Emory University!  
+In this project, we explore **how demographic and education indicators are associated with development outcomes over time** using real-world data from the **World Bank's World Development Indicators (WDI)** from **1960 to 2023**.
 
 ---
 
-## Group Members
+## 📚 Project Description
 
-- Jacky An 
+This study investigates the long-term relationships among four key global development indicators:
+
+- **Life Expectancy at Birth** (`SP.DYN.LE00.IN`)  
+- **Fertility Rate** (`SP.DYN.TFRT.IN`)  
+- **Population Growth** (`SP.POP.GROW`)  
+- **Primary School Enrollment, Gross (%)** (`SE.PRM.ENRR`)  
+
+By analyzing these indicators across more than **100 countries** over **six decades**, we aim to answer important questions about health, education, and demographic transitions worldwide.  
+Our approach combines **descriptive analysis**, **visualization**, and **multivariable regression modeling** to uncover significant patterns and predictors of development.
+
+---
+
+## 🔍 Research Questions
+
+1. **Global Trends**: How has life expectancy evolved globally since 1960, and how does it relate to changes in fertility and education?
+2. **Education and Fertility**: What is the relationship between school enrollment rates and fertility rates across countries and regions?
+3. **Population Growth and Challenges**: Do countries with faster population growth experience different development patterns in terms of life expectancy?
+4. **Predictive Modeling**: Can we accurately predict life expectancy using fertility rates, school enrollment, and population growth rates?
+
+---
+
+## 🏗️ Repository Structure
+
+```
+QTM350_final_project/
+├── datasets/         # Raw and processed data files
+├── figures/          # Generated plots and backup visualizations
+├── scripts/          # Python scripts for analysis and modeling
+│   ├── data_analysis.py
+│   └── regression_models.py
+├── report/           # Final report files (.qmd and .html)
+├── README.md         # Project overview (this file)
+└── requirements.txt  # (optional) list of dependencies
+```
+
+- **datasets/**: Contains the downloaded World Bank WDI dataset used for analysis.
+- **scripts/**: 
+  - `data_analysis.py`: Prepares the data, creates descriptive statistics, and visualizes key relationships.
+  - `regression_models.py`: Runs multivariable regression models predicting life expectancy.
+- **figures/**: Backup storage for generated plots, including trendlines and regression plots.
+- **report/**:
+  - `report.qmd`: Quarto markdown source for the final report.
+  - `report.html`: Rendered full report with narratives, visualizations, and findings.
+
+---
+
+## 🖥️ How to Reproduce Our Analysis
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/JackyAn0072/QTM350_final_project.git
+cd QTM350_final_project
+```
+
+### 2. Set Up the Environment
+
+Install required Python libraries:
+
+```bash
+pip install pandas numpy matplotlib seaborn statsmodels quarto
+```
+
+You may also need to install **Quarto CLI** if you want to render the `.qmd` report:
+- [Install Quarto](https://quarto.org/docs/get-started/)
+
+### 3. Run the Scripts
+
+- Data analysis:  
+  ```bash
+  python scripts/data_analysis.py
+  ```
+- Regression modeling:  
+  ```bash
+  python scripts/regression_models.py
+  ```
+
+### 4. View the Final Report
+
+Open the `report/report.html` file in your browser to explore the full findings, graphs, and interpretations.
+
+---
+
+## 📊 Technologies Used
+
+| Tool | Purpose |
+|:-----|:--------|
+| **Python 3.10+** | Main programming language |
+| **Pandas** | Data manipulation |
+| **NumPy** | Numerical operations |
+| **Matplotlib & Seaborn** | Data visualization |
+| **Statsmodels** | Regression modeling |
+| **Quarto** | Report generation (HTML/Markdown) |
+
+---
+
+## 👥 Team Members
+
+- Jacky An  
 - Bernice  
 - Eric  
 
----
-
-## Research Questions
-
-1. How has life expectancy evolved globally since 1960, and how is it associated with fertility and education trends?  
-2. What is the relationship between school enrollment and fertility rate across countries?  
-3. Do countries with rapid population growth face distinct development challenges in terms of life expectancy?  
-4. What insights can we derive from multivariable regression models that predict life expectancy using demographic and education indicators?
+Each team member contributed to different parts of the project, including data cleaning, exploratory analysis, statistical modeling, and report writing.
 
 ---
 
-## Project Overview
+## 🙏 Acknowledgments
 
-This project leverages real-world data from the **World Bank’s World Development Indicators (WDI)** database. We focus on four key development indicators that reflect demographic and human capital trends:
-
-- **Life Expectancy at Birth (SP.DYN.LE00.IN)**  
-- **Fertility Rate (SP.DYN.TFRT.IN)**  
-- **Population Growth (SP.POP.GROW)**  
-- **School Enrollment, Primary (% gross) (SE.PRM.ENRR)**
-
-By analyzing these indicators across over 100 countries and more than six decades, we aim to uncover patterns that reveal how improvements in healthcare, education, and demographic shifts are linked to long-term development outcomes.
+- **World Bank Group**: For providing open access to the WDI database.
+- **Professor Danilo Freire**: For his guidance and feedback throughout the project.
 
 ---
 
-## Repository Structure
+## 📄 License
 
-1. **data**  
-   - We store this in the datasets file 
-
-2. **scripts**  
-   - `data_analysis.py`: Main script for data wrangling, statistical analysis, and visualization.  
-   - `regression_models.py`: Supplementary script for running regression models predicting life expectancy.
-
-3. **figures**  
-   - We store this for backup in the file figure
-
-4. **report**  
-   - `report.qmd` and `report.html`: Final compiled report containing narrative explanations, plots, and statistical results.
-
+This project is for academic use only under the guidelines of QTM350 coursework.  
+No commercial use permitted without permission.
 
 ---
 
-## Reproducing the Project
+## 🚀 Quick Links
 
-To replicate our results and analysis:
-
-1. **Download the Repository**  
-   Clone or download this GitHub repository to your local machine.
-
-2. **Install Dependencies**  
-   Required Python libraries include: `pandas`, `numpy`, `matplotlib`, `seaborn`, `statsmodels`, and `quarto`.
-
-3. **Run the Analysis**  
-   - Open and execute `scripts/data_analysis.py` to reproduce data cleaning, visualization, and correlation analyses.  
-   - Optionally run `regression_models.py` for the statistical modeling portion.
-
-4. **View the Report**  
-   Open the compiled `report.html` or `report.qmd` file under the `report/` folder to explore our full findings, visualizations, and conclusions.
-
----
-
-## Technologies Used
-
-- **Python**: Data cleaning, analysis, regression modeling  
-- **Pandas & NumPy**: Data manipulation and transformation  
-- **Matplotlib & Seaborn**: Data visualization  
-- **Statsmodels**: Statistical modeling  
-- **Quarto**: Report generation and formatting  
-
----
-
-## Acknowledgments
-
-We thank the **World Bank** for providing access to the WDI database and credit our course instructor **Danilo Freire**!!!
+- [Quarto Documentation](https://quarto.org/docs/)
+- [World Bank WDI Dataset](https://databank.worldbank.org/source/world-development-indicators)

@@ -165,7 +165,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li><strong>School Enrollment, Primary (% gross)</strong> — <code>SE.PRM.ENRR</code></li>
 </ul>
-<div id="53433837" class="cell" data-execution_count="1">
+</section>
+<section id="summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h2>
+<p>Basic descriptive statistics illustrate the wide variation across countries and over time. Life expectancy ranged from less than 50 years to over 85 years, reflecting significant disparities in health outcomes globally. Fertility rates vary dramatically, from under 1.5 births per woman in some developed nations to over 7 births per woman in parts of Sub-Saharan Africa.</p>
+</section>
+<section id="life-expectancy-trends" class="level2">
+<h2 class="anchored" data-anchor-id="life-expectancy-trends">Life Expectancy Trends</h2>
+<p>Globally, life expectancy has shown a steady upward trend. Notably, countries like Rwanda and Ethiopia have experienced gains of over 15 years since 2000, highlighting the success of health interventions.</p>
+<p>SQL-based analysis revealed that despite overall improvements, some countries, due to conflict, pandemics, or governance challenges, have witnessed stagnation or declines in life expectancy.</p>
+</section>
+<section id="fertility-rate-patterns" class="level2">
+<h2 class="anchored" data-anchor-id="fertility-rate-patterns">Fertility Rate Patterns</h2>
+<p>Fertility rates have generally declined worldwide, aligning with increased educational attainment and urbanization. SQL correlation analysis found a strong negative relationship (-0.68) between fertility rate and life expectancy, confirming demographic transition theory.</p>
+</section>
+<section id="school-enrollment-trends" class="level2">
+<h2 class="anchored" data-anchor-id="school-enrollment-trends">School Enrollment Trends</h2>
+<p>Primary school enrollment rates have risen significantly, contributing to enhanced life outcomes. However, disparities remain, especially in low-income countries, indicating gaps in access and quality.</p>
+</section>
+<section id="population-growth-and-development-challenges" class="level2">
+<h2 class="anchored" data-anchor-id="population-growth-and-development-challenges">Population Growth and Development Challenges</h2>
+<p>Countries with high population growth rates, such as Niger and Angola, face challenges in scaling infrastructure, healthcare, and education systems to meet the needs of expanding populations.</p>
+<p>SQL analyses show that rapid population growth often correlates with lower life expectancy and lower primary enrollment rates.</p>
+</section>
+<section id="advanced-insights" class="level2">
+<h2 class="anchored" data-anchor-id="advanced-insights">Advanced Insights</h2>
+<section id="life-expectancy-growth" class="level3">
+<h3 class="anchored" data-anchor-id="life-expectancy-growth">Life Expectancy Growth</h3>
+<p>Calculating life expectancy growth rates from 2000 to 2023 reveals stark contrasts: while many nations made large strides, others struggled to maintain gains.</p>
+</section>
+<section id="fertility-and-enrollment-relationship" class="level3">
+<h3 class="anchored" data-anchor-id="fertility-and-enrollment-relationship">Fertility and Enrollment Relationship</h3>
+<p>An inverse relationship between school enrollment rates and fertility persists across decades. Higher primary enrollment is associated with reduced fertility rates, reinforcing the critical role of female education.</p>
+</section>
+<section id="regional-inequalities" class="level3">
+<h3 class="anchored" data-anchor-id="regional-inequalities">Regional Inequalities</h3>
+<p>Europe and East Asia lead in life expectancy, while Sub-Saharan Africa lags behind, with gaps exceeding 15 years in some cases. Regional averages show persistent inequality despite global improvements.</p>
+</section>
+<section id="countries-below-global-average" class="level3">
+<h3 class="anchored" data-anchor-id="countries-below-global-average">Countries Below Global Average</h3>
+<p>Over 50 countries fall below the 2023 global average life expectancy of 73 years. These countries are predominantly located in Africa and parts of South Asia.</p>
+</section>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<div id="4cfb47a0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -206,11 +250,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    df_wide[col] <span class="op">=</span> pd.to_numeric(df_wide[col], errors<span class="op">=</span><span class="st">"coerce"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="summary-statistics" class="level2">
-<h2 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h2>
-<div id="f6fabe16" class="cell" data-execution_count="2">
+<section id="summary-statistics-1" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics-1">Summary Statistics</h2>
+<div id="53e20046" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_wide[[<span class="st">"LifeExpectancy"</span>, <span class="st">"FertilityRate"</span>, <span class="st">"PopGrowth"</span>, <span class="st">"PrimaryEnrollGross"</span>]].describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -291,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="visualization-life-expectancy-over-time" class="level2">
 <h2 class="anchored" data-anchor-id="visualization-life-expectancy-over-time">Visualization: Life Expectancy Over Time</h2>
-<div id="faeeabb1" class="cell" data-execution_count="3">
+<div id="db9821cf" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>selected <span class="op">=</span> [<span class="st">"United States"</span>, <span class="st">"India"</span>, <span class="st">"China"</span>, <span class="st">"Nigeria"</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> country <span class="kw">in</span> selected:</span>
@@ -308,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="report_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="report_files/figure-html/cell-4-output-1.png" width="1141" height="564" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -318,14 +362,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exploring-relationships-between-indicators" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-relationships-between-indicators">Exploring Relationships Between Indicators</h2>
 <p>We now use a pairplot to explore the relationships among the four indicators:</p>
-<div id="0fa19a43" class="cell" data-execution_count="4">
+<div id="28a0e80d" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.pairplot(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    df_wide[[<span class="st">"LifeExpectancy"</span>, <span class="st">"FertilityRate"</span>, <span class="st">"PopGrowth"</span>, <span class="st">"PrimaryEnrollGross"</span>]].dropna()</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="report_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="report_files/figure-html/cell-5-output-1.png" width="946" height="945" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -336,13 +380,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="regression-analysis" class="level1">
 <h1>Regression Analysis</h1>
 <p>We build a linear regression model to predict life expectancy using fertility, population growth, and school enrollment:</p>
-<div id="059e13f7" class="cell" data-execution_count="5">
+<div id="be1e0685" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ols_model <span class="op">=</span> smf.ols(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"LifeExpectancy ~ FertilityRate + PopGrowth + PrimaryEnrollGross"</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    data<span class="op">=</span>df_wide</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>).fit()</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ols_model.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="7">
 <table class="simpletable caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>OLS Regression Results</caption>
 <tbody>
@@ -366,13 +410,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td data-quarto-table-cell-role="th">Date:</td>
-<td>Mon, 21 Apr 2025</td>
+<td>Sat, 26 Apr 2025</td>
 <td data-quarto-table-cell-role="th">Prob (F-statistic):</td>
 <td>0.00</td>
 </tr>
 <tr class="odd">
 <td data-quarto-table-cell-role="th">Time:</td>
-<td>23:41:07</td>
+<td>14:41:13</td>
 <td data-quarto-table-cell-role="th">Log-Likelihood:</td>
 <td>-32266.</td>
 </tr>
@@ -492,7 +536,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="additional-insights-country-group-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="additional-insights-country-group-analysis">Additional Insights: Country Group Analysis</h2>
 <p>We can group countries by income level or region (if data permits) to further refine our analysis. For now, we use a simple example of comparing high vs low fertility countries:</p>
-<div id="aad72e28" class="cell" data-execution_count="6">
+<div id="f1afd255" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_wide[<span class="st">"FertilityGroup"</span>] <span class="op">=</span> pd.qcut(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    df_wide[<span class="st">"FertilityRate"</span>],</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    q<span class="op">=</span><span class="dv">2</span>,</span>
@@ -507,7 +551,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="report_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="report_files/figure-html/cell-7-output-1.png" width="585" height="449" class="figure-img"></p>
 </figure>
 </div>
 </div>
@@ -516,11 +560,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>Our analysis shows that demographic and education indicators are deeply intertwined with population health. Life expectancy has improved dramatically worldwide since 1960, particularly in countries with declining fertility and improved school enrollment.</p>
-<p>Multivariable regression confirms the strong influence of fertility rate on life expectancy, with additional positive effects from educational access. While population growth plays a less clear role, it may be relevant when considered in combination with economic or geographic context.</p>
-<p>This project reinforces the importance of investing in education and healthcare to foster long-term development and improve quality of life globally.</p>
+<p>Our SQL-driven analysis confirms strong interdependencies among fertility, education, population growth, and life expectancy.</p>
+<p>Investments in education, particularly for girls, and access to healthcare emerge as vital strategies for improving national development outcomes. Countries that have successfully managed demographic transitions by lowering fertility and expanding education access have reaped significant health and longevity benefits.</p>
+<p>Nonetheless, stark regional disparities remain, requiring continued focus on equitable development strategies globally.</p>
+</section>
+<section id="future-work" class="level2">
+<h2 class="anchored" data-anchor-id="future-work">Future Work</h2>
+<p>Future extensions could incorporate:</p>
+<ul>
+<li>Economic indicators (GDP per capita, health expenditure)</li>
+<li>Inequality measures (Gini coefficient)</li>
+<li>Health-specific variables (vaccination coverage)</li>
+</ul>
+<p>Deeper causal modeling (e.g., instrumental variable regression) could further unpack the relationships identified here.</p>
 <hr>
 </section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li>World Bank, World Development Indicators</li>
+<li>QTM 350 Course Materials</li>
+</ul>
+<hr>
+</section>
+<section id="appendix-sql-query-highlights" class="level1">
+<h1>Appendix: SQL Query Highlights</h1>
+<p>Summarized SQL queries included:</p>
+<ul>
+<li>Calculation of average life expectancy and fertility over time</li>
+<li>Correlation estimations between fertility, education, and life expectancy</li>
+<li>Identification of top and bottom countries by growth and outcomes</li>
+<li>Analysis of regional development patterns</li>
+</ul>
+<p>All queries were conducted within an SQLite database and results visualized using Python libraries.</p>
+<hr>
 </section>
 
 </main>
