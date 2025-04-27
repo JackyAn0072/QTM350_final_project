@@ -33,20 +33,15 @@ Our approach combines **descriptive analysis**, **visualization**, and **multiva
 ```
 QTM350_final_project/
 ├── datasets/         # Raw and processed data files
-├── figures/          # Generated plots and backup visualizations
 ├── scripts/          # Python scripts for analysis and modeling
 │   ├── data_analysis.py
-│   └── regression_models.py
 ├── report/           # Final report files (.qmd and .html)
 ├── README.md         # Project overview (this file)
-└── requirements.txt  # (optional) list of dependencies
 ```
 
 - **datasets/**: Contains the downloaded World Bank WDI dataset used for analysis.
 - **scripts/**: 
-  - `data_analysis.py`: Prepares the data, creates descriptive statistics, and visualizes key relationships.
-  - `regression_models.py`: Runs multivariable regression models predicting life expectancy.
-- **figures/**: Backup storage for generated plots, including trendlines and regression plots.
+  - `data_analysis.py`: Prepares the data, creates descriptive statistics, and visualizes key relationships, regression models ang correlation tests.
 - **report/**:
   - `report.qmd`: Quarto markdown source for the final report.
   - `report.html`: Rendered full report with narratives, visualizations, and findings.
@@ -78,10 +73,6 @@ You may also need to install **Quarto CLI** if you want to render the `.qmd` rep
 - Data analysis:  
   ```bash
   python scripts/data_analysis.py
-  ```
-- Regression modeling:  
-  ```bash
-  python scripts/regression_models.py
   ```
 
 ### 4. View the Final Report
